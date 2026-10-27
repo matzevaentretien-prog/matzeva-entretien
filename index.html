@@ -703,6 +703,7 @@ footer strong{color:var(--ink)}
           <input type="hidden" name="_subject" value="Fiche devis Matzeva Entretien">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="">
           <input type="hidden" name="estimation" id="f-est" value="">
           <p class="fnote">Vous préférez en parler ? Écrivez à <a href="mailto:matzevaentretien@gmail.com">matzevaentretien@gmail.com</a> ou appelez le <a href="tel:+33661618489">06 61 61 84 89</a>.</p>
           <button class="btn" type="submit" id="f-go">Envoyer ma demande</button>
@@ -972,7 +973,7 @@ footer strong{color:var(--ink)}
   var f=document.getElementById('fiche');if(!f)return;
   function $(id){return document.getElementById(id)}
   var cim=$('f-cim'),dl=$('f-cims'),est=$('est'),estIn=$('f-est'),file=$('f-photos'),thumbs=$('thumbs'),pmsg=$('photo-msg'),drop=$('drop'),state=$('fstate'),go=$('f-go'),dateIn=$('f-date'),dmsg=$('date-msg'),corps=$('fiche-corps'),merci=$('merci'),mtxt=$('merci-txt'),frame=$('fiche-cible');
-  var photos=[],sending=false,timer=0;
+  var photos=[],sending=false,timer=0,later=0;
 
   (window.MZ_CEMS||[]).forEach(function(d){var o=document.createElement('option');o.value=d[0]+' ('+d[4]+')';dl.appendChild(o)});
 
@@ -1067,7 +1068,7 @@ footer strong{color:var(--ink)}
     state.textContent=photos.length?'Votre messagerie s’ouvre avec la fiche déjà écrite. Vos photos ne partent pas toutes seules : joignez-les au message avant d’envoyer.':'Votre messagerie s’ouvre avec la fiche déjà écrite. Joignez-y une photo de la tombe si vous en avez une, puis envoyez.';
   }
   function reset(){
-    sending=false;clearTimeout(timer);frame.onload=null;go.disabled=false;go.textContent='Envoyer ma demande';
+    sending=false;clearTimeout(timer);clearTimeout(later);frame.onload=null;go.disabled=false;go.textContent='Envoyer ma demande';
   }
   function fail(msg){
     reset();state.className='fstate err';
@@ -1101,9 +1102,17 @@ footer strong{color:var(--ink)}
         dt.items.add(p.file);inp.type='file';inp.name='photo'+(i+1);inp.className='ph';inp.hidden=true;inp.files=dt.files;f.appendChild(inp);
       });
     }catch(x){e.preventDefault();mailFallback();return}
+    f.elements._next.value=new URL('merci.html',location.href).href;
     f.action=FORM_ACTION;f.method='post';f.enctype='multipart/form-data';f.target='fiche-cible';
     sending=true;go.disabled=true;go.textContent='Envoi en cours…';
-    frame.onload=function(){done()};
+    state.textContent=photos.length?'Envoi des photos, cela peut prendre quelques secondes.':'';
+    /* Le service renvoie le cadre sur merci.html quand il a accepté la fiche ; une autre page (activation, erreur) n'est pas un succès */
+    frame.onload=function(){
+      var here='';try{here=frame.contentWindow.location.pathname}catch(x){}
+      clearTimeout(later);
+      if(/merci\.html$/.test(here)){done();return}
+      later=setTimeout(function(){fail()},15000);
+    };
     timer=setTimeout(function(){fail()},60000);
   });
 })();
