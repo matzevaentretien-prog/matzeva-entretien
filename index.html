@@ -197,6 +197,8 @@ details p{margin:0 0 22px;color:var(--ink-soft);max-width:38em}
 .opt .card b{font-family:var(--f-title);font-weight:600;font-size:1.05rem}
 .opt .card span{color:var(--ink-soft);font-size:.9rem}
 .opt input:checked+.card{border-color:var(--accent);background:var(--water);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt input:disabled{cursor:not-allowed}
+.opt input:disabled+.card{opacity:.55;background:#F3F4EE}
 .opt input:focus-visible+.card{outline:3px solid var(--accent);outline-offset:2px}
 .est{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;background:var(--water);border-radius:6px;padding:16px 18px;margin:4px 0 8px}
 .est .est-l{flex-basis:100%;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep)}
@@ -403,7 +405,7 @@ footer strong{color:var(--ink)}
         </div>
         <p>Les passages se calent sur ce qui compte : avant Elul et les fêtes de Tichri, avant une hazkara, avant un dévoilement, au printemps après l’hiver. Aucun supplément caché.</p>
       </div>
-      <p class="season"><span>Offre de saison</span>Prix réduits pour toute commande passée pendant l’offre. Pour les passages, le prix barré est le tarif qui s’appliquera après l’offre. Pour les abonnements, c’est le prix des mêmes passages Essentiel achetés séparément.</p>
+      <p class="season"><span>Offre de saison</span>Prix réduits pour toute commande passée pendant l’offre. Le prix barré est le tarif qui s’appliquera après l’offre.</p>
       <div class="rows">
         <div class="row">
           <div><h3>Passage Essentiel</h3><p>Une tombe propre et soignée, sans que vous ayez à vous déplacer : la pierre et la dalle lavées à la main, le gravier désherbé, et des photos avant et après pour voir le résultat.</p></div>
@@ -415,11 +417,11 @@ footer strong{color:var(--ink)}
         </div>
         <div class="row">
           <div><h3>Abonnement Mémoire</h3><p>Trois passages répartis sur l’année : la tombe reste soignée sans que vous ayez à y penser. Un rapport photo à chaque passage, et un rappel avant les dates qui comptent.</p></div>
-          <div class="price"><s>237&nbsp;€</s><span>217&nbsp;€</span><small>par an, soit 20&nbsp;€ d’économie sur trois passages</small></div>
+          <div class="price" style="font-size:1.4rem">Prochainement</div>
         </div>
         <div class="row">
           <div><h3>Abonnement Sérénité</h3><p>Le suivi le plus complet : quatre passages sur l’année, l’état de la tombe et l’échéance de la concession surveillés, un rapport vidéo, et la priorité avant les fêtes. Vous n’avez plus à y penser.</p></div>
-          <div class="price"><s>316&nbsp;€</s><span>286&nbsp;€</span><small>par an, soit 30&nbsp;€ d’économie sur quatre passages</small></div>
+          <div class="price" style="font-size:1.4rem">Prochainement</div>
         </div>
         <div class="row">
           <div><h3>Caveau ou tombes multiples</h3><p>Chaque sépulture est différente. Nous regardons sa taille et son état, puis nous vous envoyons un devis écrit gratuit.</p></div>
@@ -545,7 +547,7 @@ footer strong{color:var(--ink)}
         </details>
         <details>
           <summary>Je vis à l’étranger. Comment savoir que le travail est fait ?</summary>
-          <p>Vous recevez des photos datées avant et après, par e-mail, dans les 24 heures. Avec l’abonnement Sérénité, nous ajoutons un rapport vidéo.</p>
+          <p>Vous recevez des photos datées avant et après, par e-mail, dans les 24 heures. Avec l’abonnement Sérénité, bientôt disponible, nous ajouterons un rapport vidéo.</p>
         </details>
         <details>
           <summary>Que se passe-t-il si la pierre est fragile ?</summary>
@@ -553,7 +555,7 @@ footer strong{color:var(--ink)}
         </details>
         <details>
           <summary>Pouvez-vous suivre la concession ?</summary>
-          <p>Avec l’abonnement Sérénité, nous notons l’échéance de la concession et nous vous prévenons avant. Le renouvellement reste à faire par le titulaire ou ses héritiers.</p>
+          <p>Avec l’abonnement Sérénité, bientôt disponible, nous noterons l’échéance de la concession et nous vous préviendrons avant. Le renouvellement reste à faire par le titulaire ou ses héritiers.</p>
         </details>
         <details>
           <summary>Pouvez-vous passer un dimanche ou un jour de fête ?</summary>
@@ -561,7 +563,7 @@ footer strong{color:var(--ink)}
         </details>
         <details>
           <summary>Comment payer ?</summary>
-          <p>Par virement, à la commande. Le prix du devis est le prix final. Pour un abonnement, nous remboursons les passages non réalisés si vous le résiliez.</p>
+          <p>Par virement, à la commande. Le prix du devis est le prix final.</p>
         </details>
         <details>
           <summary>Pouvez-vous déposer des fleurs ?</summary>
@@ -647,8 +649,8 @@ footer strong{color:var(--ink)}
                 <!-- Les prix ci-dessous suivent la section Tarifs : les changer aux deux endroits -->
                 <label class="opt"><input type="radio" name="formule" value="Passage Essentiel" data-p="79" data-old="110"><span class="card"><b>Essentiel</b><span>79&nbsp;€, un passage</span></span></label>
                 <label class="opt"><input type="radio" name="formule" value="Passage Complet" data-p="149" data-old="199"><span class="card"><b>Complet</b><span>149&nbsp;€, un passage</span></span></label>
-                <label class="opt"><input type="radio" name="formule" value="Abonnement Mémoire" data-p="217" data-old="237" data-per="par an, 3 passages"><span class="card"><b>Mémoire</b><span>217&nbsp;€ par an, 3 passages</span></span></label>
-                <label class="opt"><input type="radio" name="formule" value="Abonnement Sérénité" data-p="286" data-old="316" data-per="par an, 4 passages"><span class="card"><b>Sérénité</b><span>286&nbsp;€ par an, 4 passages</span></span></label>
+                <label class="opt"><input type="radio" name="formule" value="Abonnement Mémoire" disabled><span class="card"><b>Abonnement Mémoire</b><span>Prochainement</span></span></label>
+                <label class="opt"><input type="radio" name="formule" value="Abonnement Sérénité" disabled><span class="card"><b>Abonnement Sérénité</b><span>Prochainement</span></span></label>
                 <label class="opt"><input type="radio" name="formule" value="Caveau ou tombes multiples" data-devis="1"><span class="card"><b>Caveau ou plusieurs tombes</b><span>Sur devis</span></span></label>
                 <label class="opt"><input type="radio" name="formule" value="À définir ensemble" checked data-conseil="1"><span class="card"><b>Je ne sais pas encore</b><span>Conseillez-moi</span></span></label>
               </div>
